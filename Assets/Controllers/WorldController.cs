@@ -7,7 +7,7 @@ using System;
 public class WorldController : MonoBehaviour
 {
     [SerializeField]
-    private SpriteAtlas atlas;
+    public SpriteAtlas atlas;
 
     GameObject worldTiles;
     MouseController mouseController;
@@ -63,8 +63,9 @@ public class WorldController : MonoBehaviour
                                                                 , Convert.ToInt32(parts[5]), Convert.ToInt32(parts[6]), parts[7]);
 
             installedObjectDict.Add(parts[0], prototype);
-            
+
             counter++;
+
         }
     }
 

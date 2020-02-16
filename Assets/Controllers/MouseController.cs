@@ -12,7 +12,8 @@ public class MouseController : MonoBehaviour
     public Tile selectedTile;
     Text toolTip_Text;
 
-
+    Vector3 dragStartPos;
+    Vector3 dragEndPos;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,35 @@ public class MouseController : MonoBehaviour
         }
         else {
             MouseOver(pos);
+            dragBuild(InstalledObject.ObjectType.Wall, pos);
+        }
+
+    }
+
+    void dragBuild(InstalledObject.ObjectType type, Vector3 position) {
+        
+        if (Input.GetMouseButtonDown(0)) {
+            dragStartPos = position;
+        }
+        if (Input.GetMouseButton(0)) {
+            dragEndPos = position;
+        }
+        if (Input.GetMouseButtonUp(0)) {
+            //Debug.Log("Drag start: " + Mathf.Floor(dragStartPos.x) + "," + Mathf.Floor(dragStartPos.y));
+            //Debug.Log("Drag end: " + Mathf.Floor(dragEndPos.x) + "," + Mathf.Floor(dragEndPos.y));
+
+
+
+            for (int x = Mathf.FloorToInt(dragStartPos.x); x < Mathf.FloorToInt(dragEndPos.x)+1; x++) {
+                for (int y = Mathf.FloorToInt(dragStartPos.y); y < Mathf.FloorToInt(dragEndPos.y)+1; y++) {
+                    //Debug.Log("Affected " + x + "," + y + " tile");
+                    GameObject obj = new GameObject(("object_" + x + "_" + y));
+                    obj.transform.position = new Vector3(x, y, -1);
+                    obj.AddComponent<SpriteRenderer>().sprite = worldController.atlas.GetSprite("stone_large");
+
+                }
+            }
+
         }
 
     }
