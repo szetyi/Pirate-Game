@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
-
-enum SpriteType { deep_water_1, deep_water_2 }
+using System;
 
 public class WorldController : MonoBehaviour
 {
@@ -15,6 +14,8 @@ public class WorldController : MonoBehaviour
 
     World world;
     public World World { get => world; }
+
+    Dictionary<string, InstalledObject> installedObjectDict = new Dictionary<string, InstalledObject>();
 
     Map currentMap;
     public Map CurrentMap {
@@ -33,6 +34,7 @@ public class WorldController : MonoBehaviour
         GenerateWorldTileGameObjects();
         world.tileMap.GenerateMap();
         CurrentMap = world.tileMap;
+        generateObjectDictionary();
         /*
         worldTiles.SetActive(false);
         
@@ -45,6 +47,25 @@ public class WorldController : MonoBehaviour
         GenerateMapTileGameObjects(world.maps[1]);
         world.maps[1].RandomizeTiles();
         */
+    }
+
+    void generateObjectDictionary() {
+        System.IO.StreamReader file = new System.IO.StreamReader("Assets/Configs/installedObjects.cfg");
+        string line;
+        int counter = 0;
+
+        while ((line = file.ReadLine()) != null) {
+            string[] parts = line.Split('>');
+            InstalledObject prototype = new InstalledObject();
+            InstalledObject.ObjectType prototypeType;
+            Enum.TryParse(parts[1], out prototypeType);
+            prototype = prototype.createInstalledObjectPrototype(prototypeType, parts[2], Convert.ToBoolean(parts[3]), Convert.ToBoolean(parts[4])
+                                                                , Convert.ToInt32(parts[5]), Convert.ToInt32(parts[6]), parts[7]);
+
+            installedObjectDict.Add(parts[0], prototype);
+            
+            counter++;
+        }
     }
 
     public void ButtonSelectMap() {
