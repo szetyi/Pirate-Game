@@ -715,6 +715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e82d38f48c6ac4298e672c1ee24c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missingSprite: {fileID: 21300000, guid: 9eaf097d45dac9e4bb20eee03bbdbf29, type: 3}
+  buildSprite: {fileID: 21300000, guid: e8fe9b1732c0cb84e94aea6003927f45, type: 3}
   atlas: {fileID: 4343727234628468602, guid: 879eaa4551b03394facafa7e17b30c9c, type: 2}
 --- !u!1 &1439675333
 GameObject:

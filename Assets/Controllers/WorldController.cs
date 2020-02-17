@@ -6,6 +6,9 @@ using System;
 
 public class WorldController : MonoBehaviour
 {
+    public Sprite missingSprite;
+    public Sprite buildSprite;
+
     [SerializeField]
     public SpriteAtlas atlas;
 
@@ -88,8 +91,7 @@ public class WorldController : MonoBehaviour
         else {
             GameObject.Find("/World/Map_" + x + "_" + y).SetActive(true);
         }
-
-
+        
         for (int i = 0; i < world.maps.Count; i++) {
             if (world.maps[i].Name == "map_" + x + "_" + y) 
             {
@@ -97,8 +99,10 @@ public class WorldController : MonoBehaviour
                 return;
             }
         }
-        
+    }
 
+    public void ButtonSelectWorld() {
+        
     }
 
     // This generates game objects for the world map, which are stored in the WorldTiles parent.

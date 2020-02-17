@@ -3,7 +3,10 @@ guid: 54e82d38f48c6ac4298e672c1ee24c54
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - missingSprite: {instanceID: 0}
+  - buildSprite: {instanceID: 0}
+  - atlas: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

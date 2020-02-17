@@ -49,17 +49,34 @@ public class MouseController : MonoBehaviour
             dragEndPos = position;
         }
         if (Input.GetMouseButtonUp(0)) {
-            //Debug.Log("Drag start: " + Mathf.Floor(dragStartPos.x) + "," + Mathf.Floor(dragStartPos.y));
-            //Debug.Log("Drag end: " + Mathf.Floor(dragEndPos.x) + "," + Mathf.Floor(dragEndPos.y));
+            Debug.Log("Drag start: " + Mathf.Floor(dragStartPos.x) + "," + Mathf.Floor(dragStartPos.y));
+            Debug.Log("Drag end: " + Mathf.Floor(dragEndPos.x) + "," + Mathf.Floor(dragEndPos.y));
 
 
+            int x1 = Mathf.FloorToInt(dragStartPos.x);
+            int x2 = Mathf.FloorToInt(dragEndPos.x);
+            int y1 = Mathf.FloorToInt(dragStartPos.y);
+            int y2 = Mathf.FloorToInt(dragEndPos.y);
+            int temp;
 
-            for (int x = Mathf.FloorToInt(dragStartPos.x); x < Mathf.FloorToInt(dragEndPos.x)+1; x++) {
-                for (int y = Mathf.FloorToInt(dragStartPos.y); y < Mathf.FloorToInt(dragEndPos.y)+1; y++) {
+            if(x2 < x1) {
+                temp = x1;
+                x1 = x2;
+                x2 = temp;
+            }
+
+            if(y2 < y1) {
+                temp = y1;
+                y1 = y2;
+                y2 = temp;
+            }
+
+            for (int x = x1; x < x2 + 1; x++) {
+                for (int y = y1; y < y2 + 1; y++) {
                     //Debug.Log("Affected " + x + "," + y + " tile");
                     GameObject obj = new GameObject(("object_" + x + "_" + y));
                     obj.transform.position = new Vector3(x, y, -1);
-                    obj.AddComponent<SpriteRenderer>().sprite = worldController.atlas.GetSprite("stone_large");
+                    obj.AddComponent<SpriteRenderer>().sprite = worldController.buildSprite;
 
                 }
             }
